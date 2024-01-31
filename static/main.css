@@ -1,0 +1,118 @@
+/* Copyright (c) 2024 Julian Müller (ChaoticByte) */
+:root {
+    --text-color: #fffffc;
+    --box-bg: #ffffff25;
+    --btn-bg: #ffffff3b;
+    --border-color: #707070;
+    --corner-radius: .4rem;
+}
+body {
+    /* layout */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* coloring */
+    color: var(--text-color);
+    background: linear-gradient(30deg, #0d141d, #1d192e);
+    background-size: contain;
+    /* font stuff */
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: inherit;
+}
+.symbtn {
+    width: 3rem;
+    height: 3rem;
+    background-size: 2.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: var(--corner-radius);
+    background-color: transparent;
+    transition: background-color 100ms;
+    transition: transform 100ms;
+}
+.symbtn:hover {
+    background-color: var(--btn-bg);
+}
+.symbtn:active {
+    transform: scale(0.9);
+}
+.symbtn:disabled {
+    opacity: 70%;
+    transform: none;
+    background-color: transparent;
+    cursor: initial;
+}
+.nodisplay {
+    display: none;
+}
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    gap: .5rem;
+}
+.startBtn, .stopBtn {
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+}
+.startBtn {
+    background-image: url("material-icons/mic.svg");
+}
+.startBtn:hover {
+    background-color: red;
+}
+.stopBtn {
+    background-image: url("material-icons/stop.svg");
+}
+.transcribeBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: 2rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("material-icons/transcribe.svg");
+}
+.transcript {
+    margin-top: 5rem;
+    display: block;
+    width: 60%;
+    height: fit-content;
+    text-align: center;
+}
+.transcript.loading {
+    font-size: 0;
+    background-image: url("material-icons/cycle.svg");
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+    opacity: 70%;
+    animation: spinning 3s infinite linear;
+}
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@media only screen and (max-width: 800px) {
+    .transcript {
+        width: 90%;
+    }
+}

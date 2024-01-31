@@ -1,0 +1,18 @@
+{
+    admin off
+}
+
+http://0.0.0.0:8001 {
+    root * ./static
+    file_server
+    header {
+        X-Frame-Options DENY
+        X-Content-Type-Options nosniff
+        X-Permitted-Cross-Domain-Policies none
+        Referrer-Policy no-referrer
+        Cross-Origin-Embedder-Policy require-corp
+        Cross-Origin-Opener-Policy same-origin
+        Permissions-Policy accelerometer=(),ambient-light-sensor=(),autoplay=(),battery=(),camera=(),display-capture=(),document-domain=(),encrypted-media=(),fullscreen=(),gamepad=(),geolocation=(),gyroscope=(),layout-animations=(self),legacy-image-formats=(self),magnetometer=(),microphone=(self),midi=(),oversized-images=(self),payment=(),picture-in-picture=(),publickey-credentials-get=(),speaker-selection=(),sync-xhr=(self),unoptimized-images=(self),unsized-media=(self),usb=(),screen-wake-lock=(),web-share=(),xr-spatial-tracking=()
+        Cache-Control max-age=86400
+    }
+}
