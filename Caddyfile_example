@@ -2,8 +2,9 @@
     admin off
 }
 
-http://127.0.0.1:8001 {
+:8001 {
     root * ./static
+    respond /settings.json "\{\"api_url\": \"http://{http.request.host}:8000\"\}"
     file_server
     header {
         X-Frame-Options DENY
