@@ -2,9 +2,13 @@
     admin off
 }
 
-:8001 {
+https://example.org {
     root * ./static
-    respond /settings.json "\{\"api_url\": \"http://{http.request.host}:8000\"\}"
+    route /api/* {
+        uri strip_prefix /api
+        reverse_proxy localhost:8000
+    }
+    respond /settings.json "\{\"api_url\": \"https://{http.request.hostport}/api\"\}"
     file_server
     header {
         X-Frame-Options DENY
