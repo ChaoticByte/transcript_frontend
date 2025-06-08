@@ -17,6 +17,7 @@ async function api_is_online(settings) {
     let audioPrev = document.getElementById("audioPrev");
     let transcribeBtn = document.getElementById("transcribeBtn");
     let transcriptText = document.getElementById("transcript");
+    let copyBtn = document.getElementById("copyBtn");
     // Load Settings
     const settings_resp = await fetch("settings.json");
     const settings = await settings_resp.json();
@@ -24,7 +25,7 @@ async function api_is_online(settings) {
         settings.api_url = settings.api_url.substring(0, settings.api_url.length - 1);
     }
     if (await api_is_online(settings)) {
-        // Recorder
+        // Audio Recorder
         let audioBlob;
         const recorder = new Recorder(startBtn, stopBtn, async (blob) => {
             audioBlob = blob;
@@ -34,16 +35,22 @@ async function api_is_online(settings) {
             transcribeBtn.classList.remove("nodisplay");
         });
         recorder.init();
-        // Additional handlers
+        // Handlers
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(transcriptText.innerText);
+        });
         startBtn.addEventListener("click", () => {
+            // Recording
             audioPrev.classList.add("nodisplay");
             transcribeBtn.classList.add("nodisplay");
             transcriptText.innerText = "";
-        })
-        // Transcribe
+            copyBtn.classList.add("nodisplay");
+        });
         transcribeBtn.addEventListener("click", async () => {
+            // Transcription
             transcribeBtn.disabled = true;
             transcriptText.classList.add("loading");
+            copyBtn.classList.add("nodisplay");
             const formData = new FormData();
             formData.append("audio", audioBlob);
             let response = await fetch(settings.api_url, {
@@ -52,6 +59,9 @@ async function api_is_online(settings) {
             });
             let t = await response.text();
             transcriptText.innerText = t;
+            if (transcriptText.innerText.length > 0) {
+                copyBtn.classList.remove("nodisplay");
+            }
             transcriptText.classList.remove("loading");
             transcribeBtn.disabled = false;
         });

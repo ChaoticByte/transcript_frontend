@@ -87,12 +87,27 @@ button {
     background-repeat: no-repeat;
     background-image: url("material-icons/transcribe.svg");
 }
-.transcript {
+.copyBtn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: 2rem;
+    background-image: url("material-icons/copy.svg");
+}
+.transcriptContainer {
     margin-top: 5rem;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
     width: 60%;
     height: fit-content;
     text-align: center;
+}
+.transcript {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 .transcript.loading {
     font-size: 0;
@@ -112,7 +127,7 @@ button {
     }
 }
 @media only screen and (max-width: 800px) {
-    .transcript {
+    .transcriptContainer {
         width: 90%;
     }
 }
